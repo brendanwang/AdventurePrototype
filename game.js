@@ -306,17 +306,16 @@ class Scene2 extends AdventureScene {
             .setInteractive()
             .on('pointerover', () => {
                 if (this.hasItem("card")) {
-                    this.showMessage("You've got the card to unlock the door.");
+                    this.showMessage("You've got the card and dumpster key to continue.");
                 }
                 else {
-                    this.showMessage("It's locked. Can you find a card?");
+                    this.showMessage("You need a card and a dumpster key to continue.");
                 }
             })
             .on('pointerdown', () => {
-                if (this.hasItem("card")) {
+                if (this.hasItem("card") && this.hasItem("dumpster key")) {
                     this.loseItem("card");
                     this.showMessage("*squeak*");
-                    door.setText("🚪 unlocked door");
                     this.gotoScene('scene3');
                 }
             })
@@ -889,7 +888,7 @@ const game = new Phaser.Game({
         height: 1080
     },
     // for debugging
-    scene: [Scene2],
+    scene: [Scene3,Scene4],
     //scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
     title: "Adventure Game",
 });
