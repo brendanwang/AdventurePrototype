@@ -127,6 +127,7 @@ class Scene1 extends AdventureScene {
         this.load.image('trash','trash.png');
         this.load.image('door_scene1','door_scene1.png');
         this.load.image('drawer','drawer.png');
+        this.load.image('enemy','enemy.png');
     }
 
     onEnter() {
@@ -159,6 +160,16 @@ class Scene1 extends AdventureScene {
                         duration: 100
                     });
                 }
+            })
+
+        //let enemy  = this.add.text(700, 500, "🧟‍♂️")
+        let enemy = this.add.image(700, 500, 'enemy')
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("This is an enemy.")
+            })
+            .on('pointerdown', () => {
+                this.gotoScene('loseScreen');
             })
 
         let trash = this.add.image(700, 100, 'trash')
@@ -222,14 +233,7 @@ class Scene1 extends AdventureScene {
             })
         })
 
-        let enemy  = this.add.text(700, 500, "🧟‍♂️")
-        .setFontSize(this.s * 4)
-        .setInteractive()
-        .on('pointerover', () => this.showMessage("This is an enemy."))
-        .on('pointerdown', () => {
-            this.gotoScene('loseScreen');
-        })
-
+        //let door = this.add.text(150,30,"door")
         let door = this.add.image(150, 30, 'door_scene1')
             //.setFontSize(this.s * 5)
             .setInteractive()
@@ -245,11 +249,12 @@ class Scene1 extends AdventureScene {
                 if (this.hasItem("card") && this.hasItem("🙍‍♂️ hostage")) {
                     this.loseItem("card");
                     this.showMessage("*squeak*");
-                    door.setText("🚪 unlocked door");
+                    //door.setText("🚪 unlocked door");
                     this.gotoScene('scene2');
                 }
             })
 
+        
     }
 }
 
@@ -811,7 +816,7 @@ const game = new Phaser.Game({
         height: 1080
     },
     // for debugging
-    scene: [Scene1],
-    //scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
+    //scene: [Scene1,Scene2],
+    scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
     title: "Adventure Game",
 });
