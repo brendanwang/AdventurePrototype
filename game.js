@@ -116,7 +116,7 @@ class CreditsScreen extends Phaser.Scene {
 // the first room
 class Scene1 extends AdventureScene {
     constructor() {
-        super("scene1", "First Room");
+        super("scene1", "The Bedroom");
     }
 
     preload() {
@@ -174,7 +174,7 @@ class Scene1 extends AdventureScene {
         let enemy = this.add.image(1100, 200, 'enemy')
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("This is an enemy.")
+                this.showMessage("This is an enemy. Don't touch them.")
             })
             .on('pointerdown', () => {
                 this.gotoScene('loseScreen');
@@ -289,7 +289,7 @@ class Scene1 extends AdventureScene {
 // room with the bookshelves
 class Scene2 extends AdventureScene {
     constructor() {
-        super("scene2", "Second Room")
+        super("scene2", "Library")
     }
 
     preload() {
@@ -518,18 +518,19 @@ class Scene2 extends AdventureScene {
 // room with the dumpsters
 class Scene3 extends AdventureScene {
     constructor() {
-        super("scene3","Third Room");
+        super("scene3","Garbage Disposal Room");
     }
     
     preload() {
         this.load.path = 'assets/';
         this.load.image('player','player.png');
         this.load.image('card','card.png');
+        this.load.image('dumpster','dumpster.png');
+        this.load.image('door_scene3','door_scene3.png');
     }
 
     onEnter() {
-        let door = this.add.text(1300, 30, "🚪")
-            .setFontSize(this.s * 5)
+        let door = this.add.image(1410, 530, 'door_scene3')
             .setInteractive()
             .on('pointerover', () => {
                 if (this.hasItem("card")) {
@@ -543,13 +544,11 @@ class Scene3 extends AdventureScene {
                 if (this.hasItem("card")) {
                     this.loseItem("card");
                     this.showMessage("*squeak*");
-                    door.setText("🚪 unlocked door");
                     this.gotoScene('scene4');
                 }
             })
 
-        let empty_dumpster1a  = this.add.text(300, 20, "🟩")
-        .setFontSize(this.s * 6)
+        let empty_dumpster1a  = this.add.image(300, 210, 'dumpster')
         .setInteractive()
         .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
@@ -566,8 +565,7 @@ class Scene3 extends AdventureScene {
             this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
-        let empty_dumpster2a  = this.add.text(600, 20, "🟩")
-        .setFontSize(this.s * 6)
+        let empty_dumpster2a  = this.add.image(700, 210, 'dumpster')
         .setInteractive()
         .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
@@ -584,8 +582,7 @@ class Scene3 extends AdventureScene {
             this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
-        let empty_dumpster3a  = this.add.text(900, 20, "🟩")
-        .setFontSize(this.s * 6)
+        let empty_dumpster3a  = this.add.image(1100, 210, 'dumpster')
         .setInteractive()
         .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
@@ -602,8 +599,7 @@ class Scene3 extends AdventureScene {
             this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
-        let empty_dumpster1b  = this.add.text(300, 480, "🟩")
-        .setFontSize(this.s * 6)
+        let empty_dumpster1b  = this.add.image(300, 530, 'dumpster')
         .setInteractive()
         .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
@@ -620,8 +616,7 @@ class Scene3 extends AdventureScene {
             this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
-        let empty_dumpster2b  = this.add.text(600, 480, "🟩")
-        .setFontSize(this.s * 6)
+        let empty_dumpster2b  = this.add.image(700, 530, 'dumpster')
         .setInteractive()
         .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
@@ -638,8 +633,7 @@ class Scene3 extends AdventureScene {
             this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
-        let empty_dumpster3b  = this.add.text(900, 480, "🟩")
-        .setFontSize(this.s * 6)
+        let empty_dumpster3b  = this.add.image(1100, 530, 'dumpster')
         .setInteractive()
         .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
@@ -657,8 +651,7 @@ class Scene3 extends AdventureScene {
         })
 
         // locked dumpster that has a card inside
-        let empty_dumpster1c  = this.add.text(300, 940, "🟩")
-        .setFontSize(this.s * 6)
+        let empty_dumpster1c  = this.add.image(300, 850, 'dumpster')
         .setInteractive()
         .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
@@ -689,8 +682,7 @@ class Scene3 extends AdventureScene {
             }
         })
 
-        let empty_dumpster2c  = this.add.text(600, 940, "🟩")
-        .setFontSize(this.s * 6)
+        let empty_dumpster2c  = this.add.image(700, 850, 'dumpster')
         .setInteractive()
         .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
@@ -707,8 +699,7 @@ class Scene3 extends AdventureScene {
             this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
-        let empty_dumpster3c  = this.add.text(900, 940, "🟩")
-        .setFontSize(this.s * 6)
+        let empty_dumpster3c  = this.add.image(1100, 850, 'dumpster')
         .setInteractive()
         .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
@@ -888,7 +879,7 @@ const game = new Phaser.Game({
         height: 1080
     },
     // for debugging
-    scene: [Scene3,Scene4],
-    //scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
+    //scene: [Scene3,Scene4],
+    scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
     title: "Adventure Game",
 });
