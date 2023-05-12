@@ -89,17 +89,25 @@ class CreditsScreen extends Phaser.Scene {
             fill: "white"});
 
         // first credits line
-        this.add.text(660, 500, "Everything is my own work besides the default fonts", {
+        this.add.text(460, 500, "Everything is my own work besides the default fonts", {
             font: "35px Lora", 
             fill: "white"});
 
         // second credits line
-        this.add.text(660, 600, "The Blackwater Interactive logo was hand drawn by me in 'Goodnotes'", {
+        this.add.text(460, 600, "The Blackwater Interactive logo was hand drawn by me in 'Goodnotes'", {
             font: "35px Lora", 
             fill: "white"});
 
         // third credits line
-        this.add.text(660, 700 , "'EXTRACTION' logo was drawn by me in 'ASEPRITE'", {
+        this.add.text(460, 700 , "All sprites were designed by me in 'ASEPRITE'", {
+            font: "35px Lora", 
+            fill: "white"});
+
+        this.add.text(460, 800 , "Read more about how I designed sprites in 'ASEPRITE' in README.md", {
+            font: "35px Lora", 
+            fill: "white"});
+
+        this.add.text(460, 900 , "Press SPACE to exit", {
             font: "35px Lora", 
             fill: "white"});
 
@@ -113,7 +121,7 @@ class CreditsScreen extends Phaser.Scene {
     }
 }
 
-// the first room
+// the bedroom
 class Scene1 extends AdventureScene {
     constructor() {
         super("scene1", "The Bedroom");
@@ -174,7 +182,7 @@ class Scene1 extends AdventureScene {
         let enemy = this.add.image(1100, 200, 'enemy')
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("This is an enemy. Don't touch them.")
+                this.showMessage("This is an enemy. Don't hover over them in the future.")
             })
             .on('pointerdown', () => {
                 this.gotoScene('loseScreen');
@@ -744,6 +752,9 @@ class Scene4 extends AdventureScene {
 
     onEnter() {
 
+        // fill background with grass color
+        this.cameras.main.setBackgroundColor(0x125700)
+
         let trapdoor = this.add.image(190, 530, 'trapdoor')
         .setInteractive()
         .on('pointerover', () => {
@@ -764,21 +775,22 @@ class Scene4 extends AdventureScene {
 
         this.add.image(190, 350, 'down_arrow')
         
-        // placeholder to know where to place landmines
+        // placeholder to see where to place landmines
         // this.add.image(1410, 530, 'door_scene3')
 
+        // hitbox for mines is a square D:
         let minefield_top = this.add.image(690, 250, 'minefield_top')
         .setInteractive()
         .on('pointerover', () => {
-            this.showMessage('debug_minefield');
-            //this.gotoScene('blownUpScreen');
+            //this.showMessage('debug_minefield');
+            this.gotoScene('blownUpScreen');
         })
 
         let minefield_bottom = this.add.image(690, 860, 'minefield_bottom')
         .setInteractive()
         .on('pointerover', () => {
-            this.showMessage('debug_minefield');
-            //this.gotoScene('blownUpScreen');
+            //this.showMessage('debug_minefield');
+            this.gotoScene('blownUpScreen');
         })
 
         let key = this.add.image(190, 890, 'key')
@@ -843,16 +855,7 @@ class Scene4 extends AdventureScene {
                 });
             }
         })
-        /* this.tweens.add({
-            targets:hostage,
-            x: 1000,
-            //x: '+=' + this.s,
-            repeat: -1,
-            yoyo: true,
-            ease: 'Sine.inOut',
-            duration: 400
-        })
- */
+
         let enemy_left  = this.add.image(190, 900, 'enemy')
         .setInteractive()
         .on('pointerover', () => {
@@ -864,7 +867,6 @@ class Scene4 extends AdventureScene {
         this.tweens.add({
             targets:enemy_left,
             y: 160,
-            //x: '+=' + this.s,
             repeat: -1,
             yoyo: true,
             ease: 'Sine.inOut',
@@ -949,7 +951,7 @@ const game = new Phaser.Game({
         height: 1080
     },
     // for debugging
-    //scene: [Scene4],
+    //scene: [Scene4,LoseScreen,BlownUpScreen],
     scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen, BlownUpScreen],
     title: "Adventure Game",
 });
