@@ -76,6 +76,7 @@ class CreditsScreen extends Phaser.Scene {
         this.load.path = 'assets/';
     }
     create() {
+
         // fill black
         this.cameras.main.setBackgroundColor(0x000000)
         
@@ -122,12 +123,14 @@ class Scene1 extends AdventureScene {
         this.load.path = 'assets/';
         this.load.image('player','player.png');
         this.load.image('card','card.png');
+        this.load.image('hostage','hostage.png');
+        this.load.image('trash','trash.png');
     }
 
     onEnter() {
 
-        let hostage  = this.add.text(this.w * 0.3, this.w * 0.3, "🙍‍♂️")
-            .setFontSize(this.s * 4)
+        let hostage = this.add.image(this.w * 0.3, this.w * 0.3, 'hostage')
+            //.setFontSize(this.s * 4)
             .setInteractive()
             .on('pointerover', () => this.showMessage("This is a hostage."))
             .on('pointerdown', () => {
@@ -146,8 +149,45 @@ class Scene1 extends AdventureScene {
                     this.loseItem("key");
                     this.showMessage("*you freed a hostage*");
                     this.gainItem("🙍‍♂️ hostage");
-                    hostage.setText("");
+
+                    // sprite fades out
+                    this.tweens.add({
+                        targets: hostage,
+                        alpha: {from: 1, to: 0},
+                        duration: 100
+                    });
                 }
+            })
+
+            let trash = this.add.image(700, 100, 'trash')
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("You might find something valuable in here."))
+            .on('pointerdown', () => {
+                this.showMessage("You found a key inside!");
+                this.tweens.add({
+                    targets: trash,
+                    alpha: {from: 1, to: 0},
+                    duration: 100
+                });
+
+                // spawn key after clicking trash can
+                let key = this.add.text(680, 200, "🔑")
+                .setFontSize(this.s * 3)
+                .setInteractive()
+                .on('pointerover', () => {
+                    this.showMessage("This can be used to free hostages.")
+                })
+                .on('pointerdown', () => {
+                    this.showMessage("You pick up a key.");
+                    this.gainItem('key');
+                    this.tweens.add({
+                        targets: key,
+                        y: `-=${2 * this.s}`,
+                        alpha: { from: 1, to: 0 },
+                        duration: 500,
+                        onComplete: () => key.destroy()
+                    });
+                })
             })
 
         let enemy  = this.add.text(700, 500, "🧟‍♂️")
@@ -178,23 +218,7 @@ class Scene1 extends AdventureScene {
                 });
             })
 
-        let key = this.add.text(500, 500, "🔑")
-            .setFontSize(this.s * 2)
-            .setInteractive()
-            .on('pointerover', () => {
-                this.showMessage("This can be used to free hostages.")
-            })
-            .on('pointerdown', () => {
-                this.showMessage("You pick up a key.");
-                this.gainItem('key');
-                this.tweens.add({
-                    targets: key,
-                    y: `-=${2 * this.s}`,
-                    alpha: { from: 1, to: 0 },
-                    duration: 500,
-                    onComplete: () => key.destroy()
-                });
-            })
+        
 
         let door = this.add.text(this.w * 0.1, this.w * 0.15, "🚪")
             .setFontSize(this.s * 5)
@@ -777,8 +801,8 @@ const game = new Phaser.Game({
         height: 1080
     },
     // for debugging
-    //scene: [CreditsScreen],
-    scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
+    scene: [Scene1],
+    //scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
     title: "Adventure Game",
 });
 

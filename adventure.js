@@ -9,7 +9,10 @@ class AdventureScene extends Phaser.Scene {
         this.name = name;
     }
 
-    
+    preload() {
+        this.load.path = 'assets/';
+        this.load.image('fullscreen', 'fullscreen.png');
+    }
 
     create() {
 
@@ -20,7 +23,7 @@ class AdventureScene extends Phaser.Scene {
         this.s = this.game.config.width * 0.01;
 
         this.cameras.main.setBackgroundColor('#444');
-        this.cameras.main.fadeIn(this.transitionDuration, 0, 0, 0);
+        this.cameras.main.fadeIn(this.transitionDuration, 0, 0, 0); 
 
         this.add.rectangle(this.w * 0.75, 0, this.w * 0.25, this.h).setOrigin(0, 0).setFillStyle(0);
         this.add.text(this.w * 0.75 + this.s, this.s)
@@ -40,7 +43,7 @@ class AdventureScene extends Phaser.Scene {
         this.inventoryTexts = [];
         this.updateInventory();
 
-        this.add.text(this.w-3*this.s, this.h-3*this.s, "📺")
+         this.add.text(this.w-3*this.s, this.h-3*this.s, "📺")
             .setStyle({ fontSize: `${2 * this.s}px` })
             .setInteractive({useHandCursor: true})
             .on('pointerover', () => this.showMessage('Fullscreen?'))
@@ -51,9 +54,6 @@ class AdventureScene extends Phaser.Scene {
                     this.scale.startFullscreen();
                 }
             });
-
-
-        
 
         this.onEnter();
 
