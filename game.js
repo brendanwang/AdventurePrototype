@@ -128,9 +128,17 @@ class Scene1 extends AdventureScene {
         this.load.image('door_scene1','door_scene1.png');
         this.load.image('drawer','drawer.png');
         this.load.image('enemy','enemy.png');
+        this.load.image('wall','wall.png');
+        this.load.image('key','key.png');
     }
 
     onEnter() {
+        // add walls
+        // top wall
+        this.add.image(900, 300, 'wall')
+
+        // bottom wall
+        this.add.image(900, 1300, 'wall')
 
         let hostage = this.add.image(1100, 400, 'hostage')
             //.setFontSize(this.s * 4)
@@ -172,7 +180,7 @@ class Scene1 extends AdventureScene {
                 this.gotoScene('loseScreen');
             })
 
-        let trash = this.add.image(700, 100, 'trash')
+        let trash = this.add.image(770, 100, 'trash')
         .setInteractive()
         .on('pointerover', () => this.showMessage("You might find something valuable in here."))
         .on('pointerdown', () => {
@@ -184,8 +192,9 @@ class Scene1 extends AdventureScene {
             });
 
             // spawn key after clicking trash can
-            let key = this.add.text(680, 200, "🔑")
-            .setFontSize(this.s * 3)
+            //let key = this.add.text(680, 200, "🔑")
+            let key = this.add.image(770, 100, 'key')
+            //.setFontSize(this.s * 3)
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("This can be used to free hostages.")
@@ -204,7 +213,7 @@ class Scene1 extends AdventureScene {
         })
 
         // empty drawer (left)
-        let drawer_left = this.add.image(100, 500, 'drawer')
+        let drawer_left = this.add.image(90, 500, 'drawer')
         .setInteractive()
         .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
         .on('pointerdown', () => {
