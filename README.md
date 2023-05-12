@@ -51,6 +51,47 @@ Asset sources:
 - **EXTRACTION title**
     - created by me in 'Aseprite'
     - original idea and creation
+- **Card png**
+    - created by me in 'Aseprite'
+- **Bookshelf png**
+    - created by me in 'Aseprite
+- **All doors**
+    - created by me in 'Aseprite
+- **Arrow png**
+    - created by me in 'Aseprite
+- **Drawer png**
+    - created by me in 'Aseprite
+- **Dumpster png**
+    - created by me in 'Aseprite
+- **Enemy png**
+    - created by me in 'Aseprite
+- **Fullscreen TV png**
+    - created by me in 'Aseprite
+- **Golden Key png**
+    - created by me in 'Aseprite
+- **Hostage png**
+    - created by me in 'Aseprite
+- **Key png**
+    - created by me in 'Aseprite
+- **Landmine png**
+    - created by me in 'Aseprite
+- **Minefield top**
+    - copied and pasted a bunch of the individual landmine pngs I made earlier to create a unique maze-like pattern for the last location
+    - created by me in 'Aseprite
+- **Minefield bottom**
+    - took minefield_top.png and rotated it and flipped it to create the bottom half of the map
+    - created by me in 'Aseprite
+- **Phone png**
+    - originally was going to be for calling in a helicopter to complete the extraction but decided to go the trapdoor route instead
+    - created by me in 'Aseprite
+- **Trapdoor png**
+    - created by me in 'Aseprite
+- **Trash png**
+    - created by me in 'Aseprite
+- **Vertical card png**
+    - created by me in 'Aseprite
+- **Wall png**
+    - created by me in 'Aseprite
 
 Code sources:
 - `adventure.js` and `index.html` were created for this project [Adam Smith](https://github.com/rndmcnlly) and edited by me.
