@@ -734,8 +734,9 @@ class Scene4 extends AdventureScene {
         this.load.image('enemy','enemy.png');
         this.load.image('hostage','hostage.png');
         this.load.image('trapdoor','trapdoor.png');
-        this.load.image('arrow','arrow.png');
+        this.load.image('down_arrow','down_arrow.png');
         this.load.image('player','player.png');
+        this.load.image('phone','phone.png');
 
         // placeholder to know where to place landmines
         this.load.image('door_scene3','door_scene3.png');
@@ -743,7 +744,7 @@ class Scene4 extends AdventureScene {
 
     onEnter() {
 
-        let door = this.add.image(190, 150, 'trapdoor')
+        let trapdoor = this.add.image(190, 530, 'trapdoor')
         .setInteractive()
         .on('pointerover', () => {
             if (this.hasItem("card") && this.hasItem("🙍‍♂️ last hostage")) {
@@ -759,9 +760,9 @@ class Scene4 extends AdventureScene {
                 this.showMessage("*squeak*");
                 this.gotoScene('outro');
             }
-        })
+        })        
 
-        this.add.image(190, 350, 'arrow')
+        this.add.image(190, 350, 'down_arrow')
         
         // placeholder to know where to place landmines
         // this.add.image(1410, 530, 'door_scene3')
@@ -800,10 +801,10 @@ class Scene4 extends AdventureScene {
         let card = this.add.image(590, 180, "card")            
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("You can use this to unlock doors.")
+                this.showMessage("You can use this to unlock the trapdoor and complete your mission.")
             })
             .on('pointerdown', () => {
-                this.showMessage("You pick up a card.");
+                this.showMessage("You picked up the card.");
                 this.gainItem('card');
                 this.tweens.add({
                     targets: card,
@@ -867,7 +868,7 @@ class Scene4 extends AdventureScene {
             repeat: -1,
             yoyo: true,
             ease: 'Sine.inOut',
-            duration: 1500
+            duration: 3000
         })
 
         let enemy_middle  = this.add.image(590, 160, 'enemy')
@@ -884,7 +885,7 @@ class Scene4 extends AdventureScene {
             repeat: -1,
             yoyo: true,
             ease: 'Sine.inOut',
-            duration: 1500
+            duration: 3000
         })
 
         let enemy_right  = this.add.image(990, 900, 'enemy')
@@ -901,9 +902,8 @@ class Scene4 extends AdventureScene {
             repeat: -1,
             yoyo: true,
             ease: 'Sine.inOut',
-            duration: 1500
+            duration: 3000
         })
-        
 
     }
 }
