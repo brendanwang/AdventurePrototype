@@ -132,12 +132,12 @@ class Scene1 extends AdventureScene {
 
     onEnter() {
 
-        let hostage = this.add.image(1200, 400, 'hostage')
+        let hostage = this.add.image(1100, 400, 'hostage')
             //.setFontSize(this.s * 4)
             .setInteractive()
             .on('pointerover', () => this.showMessage("This is a hostage."))
             .on('pointerdown', () => {
-                this.showMessage("Help me!");
+                this.showMessage("Help me! Find the key before they notice!");
                 this.tweens.add({
                     targets: hostage,
                     x: '+=' + this.s,
@@ -150,7 +150,7 @@ class Scene1 extends AdventureScene {
             .on('pointerdown', () => {
                 if (this.hasItem("key")) {
                     this.loseItem("key");
-                    this.showMessage("*you freed a hostage*");
+                    this.showMessage("Thank you! I'm free!");
                     this.gainItem("🙍‍♂️ hostage");
 
                     // sprite fades out
@@ -203,6 +203,25 @@ class Scene1 extends AdventureScene {
             })
         })
 
+        // empty drawer (left)
+        let drawer_left = this.add.image(100, 500, 'drawer')
+        .setInteractive()
+        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerdown', () => {
+            this.tweens.add({
+                targets: drawer_left,
+                x: '+=' + this.s,
+                repeat: 2,
+                yoyo: true,
+                ease: 'Sine.inOut',
+                duration: 100
+            });
+        })
+        .on('pointerdown', () => {
+            this.showMessage("There's nothing in here");
+        })
+
+        // drawer with card
         let drawer = this.add.image(1350, 700, 'drawer')
         .setInteractive()
         .on('pointerover', () => this.showMessage("You might find something valuable in here."))
@@ -816,7 +835,7 @@ const game = new Phaser.Game({
         height: 1080
     },
     // for debugging
-    //scene: [Scene1,Scene2],
-    scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
+    scene: [Scene1,Scene2],
+    //scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
     title: "Adventure Game",
 });
