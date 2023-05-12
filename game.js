@@ -163,7 +163,7 @@ class Scene1 extends AdventureScene {
             })
 
         //let enemy  = this.add.text(700, 500, "🧟‍♂️")
-        let enemy = this.add.image(700, 500, 'enemy')
+        let enemy = this.add.image(1100, 200, 'enemy')
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("This is an enemy.")
