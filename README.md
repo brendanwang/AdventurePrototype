@@ -1,4 +1,4 @@
-**EXTRACTION**
+**EXTRACTION**:
 A simple adventure game by Brendan Wang based on a simple adventure game engine by [Adam Smith](https://github.com/rndmcnlly).
 
 Code requirements:
@@ -14,8 +14,8 @@ Code requirements:
     - Outro
     - LoseScreen
 - **2+ methods or other enhancement added to the adventure game engine to simplify my scenes**:
-    - Enhancement 1: unsatisfied (name the method and explain the use of it).
-    - Enhancement 2: unsatisfied (name the method and explain the use of it).
+    - Enhancement 1: changed default background color
+    - Enhancement 2: adjusted transition speed so that it is faster
 
 Experience requirements:
 - **4+ locations in the game world**:
@@ -40,7 +40,9 @@ Experience requirements:
     - Every sprite in each location scene prompts the user with a message when hovering mouse over
 - **Many objects have `pointerdown` effects**:
     - Every sprite in each location scene reacts to 'pointerdown'
-- **Some objects are themselves animated**: unsatisfied (describe two examples)
+- **Some objects are themselves animated**:
+    - In the 4th location, there are moving enemies
+    - Some sprites move and jiggle when clicked on
 
 Asset sources:
 - **Blackwater Interactive Logo**
