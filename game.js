@@ -295,12 +295,14 @@ class Scene2 extends AdventureScene {
     preload() {
         this.load.path = 'assets/';
         this.load.image('player','player.png');
-        
         this.load.image('card','card.png');
+        this.load.image('door_scene2','door_scene2.png');
+        this.load.image('trash','trash.png');
+        this.load.image('drawer','drawer.png');
+        this.load.image('bookshelf','bookshelf.png');
     }
     onEnter() {
-        let door = this.add.text(20, 500, "🚪")
-            .setFontSize(this.s * 5)
+        let door = this.add.image(30, 540, 'door_scene2')
             .setInteractive()
             .on('pointerover', () => {
                 if (this.hasItem("card")) {
@@ -320,8 +322,8 @@ class Scene2 extends AdventureScene {
             })
 
         // empty drawer (very left)
-        let empty_drawer1  = this.add.text(300, 20, "🗄️")
-        .setFontSize(this.s * 5)
+        //let empty_drawer1  = this.add.text(300, 20, "🗄️")
+        let empty_drawer1 = this.add.image(300, 150, 'drawer')
         .setInteractive()
         .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
         .on('pointerdown', () => {
@@ -336,14 +338,11 @@ class Scene2 extends AdventureScene {
         })
         .on('pointerdown', () => {
             this.showMessage("There's nothing in here");
-
-            // makes it disappear
-            //empty_drawer.setText("");
         })
 
         // locked drawer with a card (middle)
-        let empty_drawer2  = this.add.text(600, 20, "🗄️")
-        .setFontSize(this.s * 5)
+        //let empty_drawer2  = this.add.text(600, 20, "🗄️")
+        let empty_drawer2 = this.add.image(700, 150, 'drawer')
         .setInteractive()
         
         .on('pointerover', () => {
@@ -375,8 +374,7 @@ class Scene2 extends AdventureScene {
         })
 
         // empty drawer (very right)
-        let empty_drawer3  = this.add.text(900, 20, "🗄️")
-        .setFontSize(this.s * 5)
+        let empty_drawer3  = this.add.image(1100, 150, 'drawer')
         .setInteractive()
         .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
         .on('pointerdown', () => {
@@ -393,9 +391,59 @@ class Scene2 extends AdventureScene {
             this.showMessage("There's nothing in here");
         })
 
+        let empty_drawer4  = this.add.image(300, 930, 'drawer')
+        .setInteractive()
+        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerdown', () => {
+            this.tweens.add({
+                targets: empty_drawer4,
+                x: '+=' + this.s,
+                repeat: 2,
+                yoyo: true,
+                ease: 'Sine.inOut',
+                duration: 100
+            });
+        })
+        .on('pointerdown', () => {
+            this.showMessage("There's nothing in here");
+        })
+
+        let empty_drawer5  = this.add.image(700, 930, 'drawer')
+        .setInteractive()
+        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerdown', () => {
+            this.tweens.add({
+                targets: empty_drawer5,
+                x: '+=' + this.s,
+                repeat: 2,
+                yoyo: true,
+                ease: 'Sine.inOut',
+                duration: 100
+            });
+        })
+        .on('pointerdown', () => {
+            this.showMessage("There's nothing in here");
+        })
+
+        let empty_drawer6  = this.add.image(1100, 930, 'drawer')
+        .setInteractive()
+        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerdown', () => {
+            this.tweens.add({
+                targets: empty_drawer6,
+                x: '+=' + this.s,
+                repeat: 2,
+                yoyo: true,
+                ease: 'Sine.inOut',
+                duration: 100
+            });
+        })
+        .on('pointerdown', () => {
+            this.showMessage("There's nothing in here");
+        })
+
         // empty bookshelf (very left)
-        let bookshelf1  = this.add.text(400, 500, "📚")
-        .setFontSize(this.s * 6)
+        let bookshelf1  = this.add.image(400, 540, 'bookshelf')
         .setInteractive()
         .on('pointerover', () => this.showMessage("You could find interesting things in here... perhaps, books?"))
         .on('pointerdown', () => {
@@ -413,8 +461,7 @@ class Scene2 extends AdventureScene {
         })
 
         // bookshelf with dumpster key (middle)
-        let bookshelf2  = this.add.text(600, 500, "📚")
-        .setFontSize(this.s * 6)
+        let bookshelf2  = this.add.image(700, 540, 'bookshelf')
         .setInteractive()
         .on('pointerover', () => this.showMessage("You could find interesting things in here... perhaps, books?"))
         .on('pointerdown', () => {
@@ -433,8 +480,7 @@ class Scene2 extends AdventureScene {
         })
 
         // bookshelf with hidden drawer key (very right)
-        let bookshelf3  = this.add.text(800, 500, "📚")
-        .setFontSize(this.s * 6)
+        let bookshelf3  = this.add.image(1000, 540, 'bookshelf')
         .setInteractive()
         .on('pointerover', () => this.showMessage("You could find interesting things in here... perhaps, books?"))
         .on('pointerdown', () => {
@@ -450,8 +496,7 @@ class Scene2 extends AdventureScene {
             });
         })
 
-        let empty_trash  = this.add.text(1300, 950, "🗑️")
-        .setFontSize(this.s * 5)
+        let empty_trash  = this.add.image(1330, 970, 'trash')
         .setInteractive()
         .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
         .on('pointerdown', () => {
@@ -844,7 +889,7 @@ const game = new Phaser.Game({
         height: 1080
     },
     // for debugging
-    scene: [Scene1,Scene2],
+    scene: [Scene2],
     //scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
     title: "Adventure Game",
 });
