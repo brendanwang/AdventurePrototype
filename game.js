@@ -125,6 +125,7 @@ class Scene1 extends AdventureScene {
         this.load.image('card','card.png');
         this.load.image('hostage','hostage.png');
         this.load.image('trash','trash.png');
+        this.load.image('door_scene1','door_scene1.png');
     }
 
     onEnter() {
@@ -218,10 +219,8 @@ class Scene1 extends AdventureScene {
                 });
             })
 
-        
-
-        let door = this.add.text(this.w * 0.1, this.w * 0.15, "🚪")
-            .setFontSize(this.s * 5)
+        let door = this.add.image(150, 30, 'door_scene1')
+            //.setFontSize(this.s * 5)
             .setInteractive()
             .on('pointerover', () => {
                 if (this.hasItem("card") && this.hasItem("🙍‍♂️ hostage")) {
