@@ -283,7 +283,7 @@ class Scene2 extends AdventureScene {
             this.showMessage("You find books... but who likes to read?");
         })
 
-        // empty bookshelf (middle)
+        // bookshelf with dumpster key (middle)
         let bookshelf2  = this.add.text(600, 500, "📚")
         .setFontSize(this.s * 6)
         .setInteractive()
@@ -299,7 +299,8 @@ class Scene2 extends AdventureScene {
             });
         })
         .on('pointerdown', () => {
-            this.showMessage("You find books... but who likes to read?");
+            this.showMessage("You find a dumpster key? You decide to keep it anyway.");
+            this.gainItem("dumpster key")
         })
 
         // bookshelf with hidden drawer key (very right)
