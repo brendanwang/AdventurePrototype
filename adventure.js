@@ -1,7 +1,8 @@
 class AdventureScene extends Phaser.Scene {
 
     init(data) {
-        this.inventory = data.inventory || [];
+        this.inventory = data.inventory || [];        
+
     }
 
     constructor(key, name) {

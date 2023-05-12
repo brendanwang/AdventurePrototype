@@ -735,6 +735,7 @@ class Scene4 extends AdventureScene {
         this.load.image('hostage','hostage.png');
         this.load.image('trapdoor','trapdoor.png');
         this.load.image('arrow','arrow.png');
+        this.load.image('player','player.png');
 
         // placeholder to know where to place landmines
         this.load.image('door_scene3','door_scene3.png');
@@ -768,13 +769,15 @@ class Scene4 extends AdventureScene {
         let minefield_top = this.add.image(690, 250, 'minefield_top')
         .setInteractive()
         .on('pointerover', () => {
-            this.showMessage("KABOOM!");
+            this.showMessage('debug_minefield');
+            //this.gotoScene('blownUpScreen');
         })
 
         let minefield_bottom = this.add.image(690, 860, 'minefield_bottom')
         .setInteractive()
         .on('pointerover', () => {
-            this.showMessage("KABOOM!");
+            this.showMessage('debug_minefield');
+            //this.gotoScene('blownUpScreen');
         })
 
         let key = this.add.image(190, 890, 'key')
@@ -851,7 +854,9 @@ class Scene4 extends AdventureScene {
  */
         let enemy_left  = this.add.image(190, 900, 'enemy')
         .setInteractive()
-        .on('pointerover', () => this.showMessage("This is an enemy."))
+        .on('pointerover', () => {
+            this.gotoScene('loseScreen')
+        })
         .on('pointerdown', () => {
             this.gotoScene('loseScreen');
         })
@@ -867,7 +872,9 @@ class Scene4 extends AdventureScene {
 
         let enemy_middle  = this.add.image(590, 160, 'enemy')
         .setInteractive()
-        .on('pointerover', () => this.showMessage("This is an enemy."))
+        .on('pointerover', () => {
+            this.gotoScene('loseScreen')
+        })
         .on('pointerdown', () => {
             this.gotoScene('loseScreen');
         })
@@ -882,7 +889,9 @@ class Scene4 extends AdventureScene {
 
         let enemy_right  = this.add.image(990, 900, 'enemy')
         .setInteractive()
-        .on('pointerover', () => this.showMessage("This is an enemy."))
+        .on('pointerover', () => {
+            this.gotoScene('loseScreen')
+        })
         .on('pointerdown', () => {
             this.gotoScene('loseScreen');
         })
@@ -921,6 +930,17 @@ class LoseScreen extends Phaser.Scene {
     }
 }
 
+class BlownUpScreen extends Phaser.Scene {
+    constructor() {
+        super('blownUpScreen');
+    }
+    create() {
+        this.add.text(50, 50, "You walked straight into a field of mines and died!").setFontSize(50);
+        this.add.text(50, 100, "Click anywhere to restart.").setFontSize(20);
+        this.input.on('pointerdown', () => this.scene.start('titleScreen'));
+    }
+}
+
 const game = new Phaser.Game({
     scale: {
         mode: Phaser.Scale.FIT,
@@ -930,6 +950,6 @@ const game = new Phaser.Game({
     },
     // for debugging
     scene: [Scene4],
-    //scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
+    //scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen, BlownUpScreen],
     title: "Adventure Game",
 });
