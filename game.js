@@ -26,8 +26,8 @@ class Intro extends Phaser.Scene {
             fill: "black"});
 
         // instructions to move to next scene
-        this.add.text(660, 800, "press SPACE to move to the next scene", {
-            font: "35px Lora", 
+        this.add.text(810, 800, "press SPACE to continue", {
+            font: "25px Lora", 
             fill: "black"});
 
         this.input.keyboard.once('keydown-SPACE', () => {
@@ -53,10 +53,62 @@ class TitleScreen extends Phaser.Scene {
     create() {        
         this.add.image(960,540,'title')
         this.add.text(800,650, "Click anywhere to begin.").setFontSize(20);
+        
+        this.add.text(810,750, "Press ESC for credits.").setFontSize(20);
+        this.input.keyboard.once('keydown-ESC', () => {
+            this.cameras.main.fadeOut(500,0,0,0)
+            this.scene.start('creditsScreen')
+        })
+
         this.input.on('pointerdown', () => {
             this.cameras.main.fade(500, 0,0,0);
             this.time.delayedCall(500, () => this.scene.start('scene1'));
         });
+    }
+}
+
+// credits scene
+class CreditsScreen extends Phaser.Scene {
+    constructor() {
+        super('creditsScreen')
+    }
+    preload() {
+        this.load.path = 'assets/';
+    }
+    create() {
+        // fill black
+        this.cameras.main.setBackgroundColor(0x000000)
+        
+        // fade into scene
+        this.cameras.main.fadeIn(1000,0,0,0)
+
+        // game studio text
+        this.add.text(850, 100, "Credits", {
+            font: "50px Lora", 
+            fill: "white"});
+
+        // first credits line
+        this.add.text(660, 500, "Everything is my own work besides the default fonts", {
+            font: "35px Lora", 
+            fill: "white"});
+
+        // second credits line
+        this.add.text(660, 600, "The Blackwater Interactive logo was hand drawn by me in 'Goodnotes'", {
+            font: "35px Lora", 
+            fill: "white"});
+
+        // third credits line
+        this.add.text(660, 700 , "'EXTRACTION' logo was drawn by me in 'ASEPRITE'", {
+            font: "35px Lora", 
+            fill: "white"});
+
+        this.input.keyboard.once('keydown-SPACE', () => {
+            this.cameras.main.fadeOut(500,0,0,0)
+        })
+
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+            this.scene.start('titleScreen')
+        })
     }
 }
 
@@ -695,37 +747,6 @@ class Scene4 extends AdventureScene {
     }
 }
 
-class Demo2 extends AdventureScene {
-    constructor() {
-        super("demo2", "Demo 2");
-    }
-    onEnter() {
-        this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
-            .setFontSize(this.s * 2)
-            .setInteractive()
-            .on('pointerover', () => {
-                this.showMessage("You've got no other choice, really.");
-            })
-            .on('pointerdown', () => {
-                this.gotoScene('demo1');
-            });
-
-        let finish = this.add.text(this.w * 0.6, this.w * 0.2, '(finish the game)')
-            .setInteractive()
-            .on('pointerover', () => {
-                this.showMessage('*giggles*');
-                this.tweens.add({
-                    targets: finish,
-                    x: this.s + (this.h - 2 * this.s) * Math.random(),
-                    y: this.s + (this.h - 2 * this.s) * Math.random(),
-                    ease: 'Sine.inOut',
-                    duration: 500
-                });
-            })
-            .on('pointerdown', () => this.gotoScene('outro'));
-    }
-}
-
 class Outro extends Phaser.Scene {
     constructor() {
         super('outro');
@@ -756,8 +777,8 @@ const game = new Phaser.Game({
         height: 1080
     },
     // for debugging
-    //scene: [Scene4, LoseScreen],
-    scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Demo2, Outro, LoseScreen],
+    //scene: [CreditsScreen],
+    scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen],
     title: "Adventure Game",
 });
 
