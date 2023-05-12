@@ -1,3 +1,4 @@
+**EXTRACTION**
 A simple adventure game by Brendan Wang based on a simple adventure game engine by [Adam Smith](https://github.com/rndmcnlly).
 
 Code requirements:
