@@ -2,9 +2,14 @@ class Intro extends Phaser.Scene {
     constructor() {
         super('intro')
     }
+    preload() {
+        this.load.path = 'assets/';
+        this.load.image('title', 'extraction.png');
+    }
+
     create() {
-        this.add.text(50,50, "Adventure awaits!").setFontSize(50);
-        this.add.text(50,100, "Click anywhere to begin.").setFontSize(20);
+        this.add.image(960,540,'title')
+        this.add.text(800,650, "Click anywhere to begin.").setFontSize(20);
         this.input.on('pointerdown', () => {
             this.cameras.main.fade(500, 0,0,0);
             this.time.delayedCall(500, () => this.scene.start('scene1'));
@@ -707,6 +712,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
+    // for debugging
     //scene: [Scene4, LoseScreen],
     scene: [Intro, Scene1, Scene2, Scene3, Scene4, Demo2, Outro, LoseScreen],
     title: "Adventure Game",
