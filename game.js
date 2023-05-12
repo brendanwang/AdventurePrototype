@@ -949,7 +949,7 @@ const game = new Phaser.Game({
         height: 1080
     },
     // for debugging
-    scene: [Scene4],
-    //scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen, BlownUpScreen],
+    //scene: [Scene4],
+    scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Outro, LoseScreen, CreditsScreen, BlownUpScreen],
     title: "Adventure Game",
 });

@@ -17,7 +17,8 @@ class AdventureScene extends Phaser.Scene {
 
     create() {
 
-        this.transitionDuration = 1000;
+        // fade transition speed
+        this.transitionDuration = 300;
 
         this.w = this.game.config.width;
         this.h = this.game.config.height;
@@ -46,17 +47,17 @@ class AdventureScene extends Phaser.Scene {
         this.inventoryTexts = [];
         this.updateInventory();
 
-         this.add.text(this.w-3*this.s, this.h-3*this.s, "📺")
-            .setStyle({ fontSize: `${2 * this.s}px` })
-            .setInteractive({useHandCursor: true})
-            .on('pointerover', () => this.showMessage('Fullscreen?'))
-            .on('pointerdown', () => {
-                if (this.scale.isFullscreen) {
-                    this.scale.stopFullscreen();
-                } else {
-                    this.scale.startFullscreen();
-                }
-            });
+        this.add.text(this.w-3*this.s, this.h-3*this.s, "📺")
+        .setStyle({ fontSize: `${2 * this.s}px` })
+        .setInteractive({useHandCursor: true})
+        .on('pointerover', () => this.showMessage('Fullscreen?'))
+        .on('pointerdown', () => {
+            if (this.scale.isFullscreen) {
+                this.scale.stopFullscreen();
+            } else  {
+                this.scale.startFullscreen();
+            }
+        });
 
         this.onEnter();
 
