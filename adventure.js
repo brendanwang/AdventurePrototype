@@ -9,7 +9,10 @@ class AdventureScene extends Phaser.Scene {
         this.name = name;
     }
 
+    
+
     create() {
+
         this.transitionDuration = 1000;
 
         this.w = this.game.config.width;
@@ -48,6 +51,9 @@ class AdventureScene extends Phaser.Scene {
                     this.scale.startFullscreen();
                 }
             });
+
+
+        
 
         this.onEnter();
 
