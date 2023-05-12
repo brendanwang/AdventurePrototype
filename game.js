@@ -5,10 +5,10 @@ class Demo1 extends AdventureScene {
 
     onEnter() {
 
-        let clip = this.add.text(this.w * 0.3, this.w * 0.3, "📎 paperclip")
+        let clip = this.add.text(this.w * 0.3, this.w * 0.3, "🧑")
             .setFontSize(this.s * 2)
             .setInteractive()
-            .on('pointerover', () => this.showMessage("Metal, bent."))
+            .on('pointerover', () => this.showMessage("This is a hostage."))
             .on('pointerdown', () => {
                 this.showMessage("No touching!");
                 this.tweens.add({
