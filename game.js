@@ -100,58 +100,20 @@ class Scene1 extends AdventureScene {
             .setFontSize(this.s * 5)
             .setInteractive()
             .on('pointerover', () => {
-                if (this.hasItem("card")) {
-                    this.showMessage("You've got the card to unlock the door.");
+                if (this.hasItem("card") && this.hasItem("🙍‍♂️ hostage")) {
+                    this.showMessage("You have the card and hostage. You are ready to leave.");
                 }
                 else {
-                    this.showMessage("It's locked. Can you find a card?");
+                    this.showMessage("You can't leave without the card and hostage!");
                 }
             })
             .on('pointerdown', () => {
-                if (this.hasItem("card")) {
+                if (this.hasItem("card") && this.hasItem("🙍‍♂️ hostage")) {
                     this.loseItem("card");
                     this.showMessage("*squeak*");
                     door.setText("🚪 unlocked door");
                     this.gotoScene('scene2');
                 }
-            })
-
-    }
-}
-
-class Scene1_Cleared extends AdventureScene {
-    constructor() {
-        super("scene1_cleared", "First Room");
-    }
-
-    preload() {
-        this.load.path = 'assets/';
-        this.load.image('player','player.png');
-        this.load.image('card','card.png');
-    }
-
-    onEnter() {
-        let enemy  = this.add.text(700, 500, "🧟‍♂️")
-        .setFontSize(this.s * 4)
-        .setInteractive()
-        .on('pointerover', () => this.showMessage("This is an enemy."))
-        .on('pointerdown', () => {
-            this.gotoScene('loseScreen');
-        })
-
-        let door = this.add.text(this.w * 0.1, this.w * 0.15, "🚪")
-            .setFontSize(this.s * 5)
-            .setInteractive()
-            .on('pointerover', () => {
-                if (this.hasItem("card")) {
-                    this.showMessage("You've got the card to unlock the door.");
-                }
-                else {
-                    this.showMessage("It's locked. Can you find a card?");
-                }
-            })
-            .on('pointerdown', () => {
-                this.gotoScene('scene2');
             })
 
     }
@@ -554,6 +516,137 @@ class Scene3 extends AdventureScene {
     }
 }
 
+class Scene4 extends AdventureScene {
+    constructor() {
+        super("scene4","Fourth Room")
+    }
+    
+    preload() {
+        this.load.path = 'assets/';
+        this.load.image('player','player.png');
+        this.load.image('card','card.png');
+    }
+
+    onEnter() {
+        let door = this.add.text(100, 30, "🚪")
+            .setFontSize(this.s * 5)
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("card")) {
+                    this.showMessage("You have the card and hostage. You are ready to leave.");
+                }
+                else {
+                    this.showMessage("You can't leave without the card and hostage!");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("card") && this.hasItem("🙍‍♂️ hostage")) {
+                    this.loseItem("card");
+                    this.showMessage("*squeak*");
+                    door.setText("🚪 unlocked door");
+                    this.gotoScene('outro');
+                }
+            })
+
+        let key = this.add.text(800, 330, "🔑")
+        .setFontSize(this.s * 2)
+        .setInteractive()
+        .on('pointerover', () => {
+            this.showMessage("This can be used to free hostages.")
+        })
+        .on('pointerdown', () => {
+            this.showMessage("You pick up a key.");
+            this.gainItem('key');
+            this.tweens.add({
+                targets: key,
+                y: `-=${2 * this.s}`,
+                alpha: { from: 1, to: 0 },
+                duration: 500,
+                onComplete: () => key.destroy()
+            });
+        })
+
+        let card = this.add.image(600, 800, "card")
+            //.setFontSize(this.s * 2)
+            
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("You can use this to unlock doors.")
+            })
+            .on('pointerdown', () => {
+                this.showMessage("You pick up a card.");
+                this.gainItem('card');
+                this.tweens.add({
+                    targets: card,
+                    y: `-=${2 * this.s}`,
+                    alpha: { from: 1, to: 0 },
+                    duration: 500,
+                    onComplete: () => card.destroy()
+                });
+            })
+        
+        let hostage  = this.add.text(330, 530, "🙍‍♂️")
+        .setFontSize(this.s * 4)
+        .setInteractive()
+        
+        .on('pointerover', () => this.showMessage("This is a hostage."))
+        
+        .on('pointerdown', () => {
+            if (this.hasItem("key")) {
+                this.loseItem("key");
+                this.showMessage("*you freed a hostage*");
+                this.gainItem("🙍‍♂️ hostage");
+                hostage.setText("");
+            }
+        })
+        this.tweens.add({
+            targets:hostage,
+            x: 1000,
+            //x: '+=' + this.s,
+            repeat: -1,
+            yoyo: true,
+            ease: 'Sine.inOut',
+            duration: 400
+        })
+
+        let enemy_left  = this.add.text(545, 800, "🧟‍♂️")
+        .setFontSize(this.s * 6)
+        .setInteractive()
+        .on('pointerover', () => this.showMessage("This is an enemy."))
+        .on('pointerdown', () => {
+            this.gotoScene('loseScreen');
+        })
+        this.tweens.add({
+            targets:enemy_left,
+            y: 650,
+            //x: '+=' + this.s,
+            repeat: -1,
+            yoyo: true,
+            ease: 'Sine.inOut',
+            duration: 500
+        })
+
+        let enemy_right  = this.add.text(760, 200, "🧟‍♂️")
+        .setFontSize(this.s * 6)
+        .setInteractive()
+        .on('pointerover', () => this.showMessage("This is an enemy."))
+        .on('pointerdown', () => {
+            this.gotoScene('loseScreen');
+        })
+        this.tweens.add({
+            targets:enemy_right,
+            y: 400,
+            //x: '+=' + this.s,
+            repeat: -1,
+            yoyo: true,
+            ease: 'Sine.inOut',
+            duration: 600
+        })
+        
+
+    }
+}
+
 class Demo2 extends AdventureScene {
     constructor() {
         super("demo2", "Demo 2");
@@ -585,8 +678,6 @@ class Demo2 extends AdventureScene {
     }
 }
 
-
-
 class Outro extends Phaser.Scene {
     constructor() {
         super('outro');
@@ -616,7 +707,8 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Scene1, Scene1_Cleared, Scene2, Scene3, Demo2, Outro, LoseScreen],
+    //scene: [Scene4, LoseScreen],
+    scene: [Intro, Scene1, Scene2, Scene3, Scene4, Demo2, Outro, LoseScreen],
     title: "Adventure Game",
 });
 
