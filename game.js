@@ -1,13 +1,56 @@
+// BLACKWATER INTERACTIVE intro scene
 class Intro extends Phaser.Scene {
     constructor() {
         super('intro')
     }
     preload() {
         this.load.path = 'assets/';
+        this.load.image('blackwater', 'blackwater.png');
+    }
+    create() {
+        // fill white
+        this.cameras.main.setBackgroundColor(0xffffff)
+
+        // for debugging, fill black
+        // this.cameras.main.setBackgroundColor(0x000000)
+        
+        // fade into scene
+        this.cameras.main.fadeIn(1000,0,0,0)
+
+        // add logo
+        this.add.image(930, 400, 'blackwater')
+
+        // game studio text
+        this.add.text(600, 700, "BLACKWATER INTERACTIVE", {
+            font: "50px Lora", 
+            fill: "black"});
+
+        // instructions to move to next scene
+        this.add.text(660, 800, "press SPACE to move to the next scene", {
+            font: "35px Lora", 
+            fill: "black"});
+
+        this.input.keyboard.once('keydown-SPACE', () => {
+            this.cameras.main.fadeOut(500,0,0,0)
+        })
+
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+            this.scene.start('titleScreen')
+        })
+    }
+}
+
+// EXTRACTION title scene
+class TitleScreen extends Phaser.Scene {
+    constructor() {
+        super('titleScreen')
+    }
+    preload() {
+        this.load.path = 'assets/';
         this.load.image('title', 'extraction.png');
     }
 
-    create() {
+    create() {        
         this.add.image(960,540,'title')
         this.add.text(800,650, "Click anywhere to begin.").setFontSize(20);
         this.input.on('pointerdown', () => {
@@ -690,7 +733,7 @@ class Outro extends Phaser.Scene {
     create() {
         this.add.text(50, 50, "That's all!").setFontSize(50);
         this.add.text(50, 100, "Click anywhere to restart.").setFontSize(20);
-        this.input.on('pointerdown', () => this.scene.start('intro'));
+        this.input.on('pointerdown', () => this.scene.start('titleScreen'));
     }
 }
 
@@ -701,7 +744,7 @@ class LoseScreen extends Phaser.Scene {
     create() {
         this.add.text(50, 50, "You were caught by an enemy!").setFontSize(50);
         this.add.text(50, 100, "Click anywhere to restart.").setFontSize(20);
-        this.input.on('pointerdown', () => this.scene.start('intro'));
+        this.input.on('pointerdown', () => this.scene.start('titleScreen'));
     }
 }
 
@@ -714,7 +757,7 @@ const game = new Phaser.Game({
     },
     // for debugging
     //scene: [Scene4, LoseScreen],
-    scene: [Intro, Scene1, Scene2, Scene3, Scene4, Demo2, Outro, LoseScreen],
+    scene: [Intro, TitleScreen, Scene1, Scene2, Scene3, Scene4, Demo2, Outro, LoseScreen],
     title: "Adventure Game",
 });
 
