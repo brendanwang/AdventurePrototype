@@ -371,14 +371,14 @@ class Scene3 extends AdventureScene {
                     this.loseItem("card");
                     this.showMessage("*squeak*");
                     door.setText("🚪 unlocked door");
-                    this.gotoScene('scene3');
+                    this.gotoScene('scene4');
                 }
             })
 
         let empty_dumpster1a  = this.add.text(300, 20, "🟩")
         .setFontSize(this.s * 6)
         .setInteractive()
-        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
             this.tweens.add({
                 targets: empty_dumpster1a,
@@ -390,13 +390,13 @@ class Scene3 extends AdventureScene {
             });
         })
         .on('pointerdown', () => {
-            this.showMessage("There's nothing in here");
+            this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
         let empty_dumpster2a  = this.add.text(600, 20, "🟩")
         .setFontSize(this.s * 6)
         .setInteractive()
-        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
             this.tweens.add({
                 targets: empty_dumpster2a,
@@ -408,13 +408,13 @@ class Scene3 extends AdventureScene {
             });
         })
         .on('pointerdown', () => {
-            this.showMessage("There's nothing in here");
+            this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
         let empty_dumpster3a  = this.add.text(900, 20, "🟩")
         .setFontSize(this.s * 6)
         .setInteractive()
-        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
             this.tweens.add({
                 targets: empty_dumpster3a,
@@ -426,13 +426,13 @@ class Scene3 extends AdventureScene {
             });
         })
         .on('pointerdown', () => {
-            this.showMessage("There's nothing in here");
+            this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
         let empty_dumpster1b  = this.add.text(300, 480, "🟩")
         .setFontSize(this.s * 6)
         .setInteractive()
-        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
             this.tweens.add({
                 targets: empty_dumpster1b,
@@ -444,13 +444,13 @@ class Scene3 extends AdventureScene {
             });
         })
         .on('pointerdown', () => {
-            this.showMessage("There's nothing in here");
+            this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
         let empty_dumpster2b  = this.add.text(600, 480, "🟩")
         .setFontSize(this.s * 6)
         .setInteractive()
-        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
             this.tweens.add({
                 targets: empty_dumpster2b,
@@ -462,13 +462,13 @@ class Scene3 extends AdventureScene {
             });
         })
         .on('pointerdown', () => {
-            this.showMessage("There's nothing in here");
+            this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
         let empty_dumpster3b  = this.add.text(900, 480, "🟩")
         .setFontSize(this.s * 6)
         .setInteractive()
-        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
             this.tweens.add({
                 targets: empty_dumpster3b,
@@ -480,13 +480,14 @@ class Scene3 extends AdventureScene {
             });
         })
         .on('pointerdown', () => {
-            this.showMessage("There's nothing in here");
+            this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
+        // locked dumpster that has a card inside
         let empty_dumpster1c  = this.add.text(300, 940, "🟩")
         .setFontSize(this.s * 6)
         .setInteractive()
-        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
             this.tweens.add({
                 targets: empty_dumpster1c,
@@ -498,13 +499,27 @@ class Scene3 extends AdventureScene {
             });
         })
         .on('pointerdown', () => {
-            this.showMessage("There's nothing in here");
+            if (this.hasItem("dumpster key")) {
+                this.loseItem("dumpster key");
+                this.gainItem("card");
+                this.showMessage("You found a card inside the locked dumpster!");
+            }
+            else {
+                this.tweens.add({
+                    targets: empty_drawer2,
+                    x: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            }
         })
 
         let empty_dumpster2c  = this.add.text(600, 940, "🟩")
         .setFontSize(this.s * 6)
         .setInteractive()
-        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
             this.tweens.add({
                 targets: empty_dumpster2c,
@@ -516,13 +531,13 @@ class Scene3 extends AdventureScene {
             });
         })
         .on('pointerdown', () => {
-            this.showMessage("There's nothing in here");
+            this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
 
         let empty_dumpster3c  = this.add.text(900, 940, "🟩")
         .setFontSize(this.s * 6)
         .setInteractive()
-        .on('pointerover', () => this.showMessage("You can find things in here if you're lucky."))
+        .on('pointerover', () => this.showMessage("This dumpster is locked. Maybe that dumpster key will come in handy later."))
         .on('pointerdown', () => {
             this.tweens.add({
                 targets: empty_dumpster3c,
@@ -534,7 +549,7 @@ class Scene3 extends AdventureScene {
             });
         })
         .on('pointerdown', () => {
-            this.showMessage("There's nothing in here");
+            this.showMessage("You try to use the dumpster key you found earlier, but it doesn't budge.");
         })
     }
 }
